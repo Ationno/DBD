@@ -12,6 +12,7 @@ y una factura puede tener varios detalles de distintos prod --> YA LO CONSULTE Y
 SELECT c.nombre, c.apellido, c.DNI, c.teléfono, c.dirección
 FROM Cliente c
 WHERE (apellido LIKE "Pe%")
+ORDER BY c.DNI
 
 /*2. Listar nombre, apellido, DNI, teléfono y dirección de clientes que realizaron compras solamente durante 2017.*/
 
