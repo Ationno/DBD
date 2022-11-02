@@ -9,17 +9,13 @@ VIAJE( FECHA,HORA,DNI, cpOrigen(fk), cpDestino(fk), razon_social(fk), descripcio
 ‘La Plata’ (ciudad origen) y que el cliente tenga apellido ‘Roma’. Ordenar por razón social y
 luego por teléfono. */
 
-
-SELECT a.RAZON_SOCIAL, a.direccion, a.telef
-FROM VIAJE v 
-    INNER JOIN AGENCIA a ON (v.razon_social = a.razon_social)
-    INNER JOIN Cliente c ON (v.DNI = c.DNI)
-WHERE v.RAZON_SOCIAL IN (
-    SELECT v.RAZON_SOCIAL
-    FROM VIAJE v INNER JOIN CIUDAD c ON(v.cpOrigen = c.CODIGOPOSTAL)
-    WHERE c.nombreCiudad = "La Plata"
-ORDER BY v.RAZON_SOCIAL, v.telef
-)
+SELECT a.direccion, a.telef, a.e-mail
+FROM Agencia a
+INNER JOIN Viaje v ON (a.razon_social = v.razon_social)
+INNER JOIN Ciudad c ON (v.cpOrigen = c.codigoPostal)
+INNER JOIN Cliente cli ON (v.DNI = cli.DNI)
+WHERE (c.nombreCiudad = 'La Plata') AND (cli.apellido = "Roma")
+ORDER BY a.razon_social, a.telef
 
 /* 2. Listar fecha, hora, datos personales del cliente, ciudad origen y destino de viajes realizados
 en enero de 2019 donde la descripción del viaje contenga el String ‘demorado’. */
